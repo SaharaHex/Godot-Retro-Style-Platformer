@@ -1,0 +1,194 @@
+[gd_scene load_steps=20 format=3 uid="uid://iycb7swvfweb"]
+
+[ext_resource type="Texture2D" uid="uid://bmq7rsyxbqhgn" path="res://assets/PlayerSprites/attack1.png" id="1_8mfc5"]
+[ext_resource type="Script" path="res://code/enemy_test.gd" id="1_bwnpr"]
+[ext_resource type="Texture2D" uid="uid://c7ve414gut3i8" path="res://assets/PlayerSprites/Run.png" id="1_qeodp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gybes"]
+atlas = ExtResource("1_8mfc5")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v307b"]
+atlas = ExtResource("1_8mfc5")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw1au"]
+atlas = ExtResource("1_8mfc5")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj1wa"]
+atlas = ExtResource("1_8mfc5")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy7eu"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ygpp"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nv72e"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyjp4"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_naq3h"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oim3w"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(1000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgfq7"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(1200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00gqx"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(1400, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6amo0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gybes")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v307b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw1au")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj1wa")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy7eu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ygpp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nv72e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyjp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_naq3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oim3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgfq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00gqx")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20bgm"]
+size = Vector2(104.5, 26)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w35ma"]
+height = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42f5o"]
+size = Vector2(27, 26)
+
+[node name="Enemy_Test" type="Node2D"]
+script = ExtResource("1_bwnpr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-16, 0)
+sprite_frames = SubResource("SpriteFrames_6amo0")
+animation = &"Attack"
+autoplay = "Run"
+frame_progress = 0.143019
+
+[node name="Spot_Enemy_Right" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="Right" type="CollisionShape2D" parent="Spot_Enemy_Right"]
+position = Vector2(92, 0)
+shape = SubResource("RectangleShape2D_20bgm")
+
+[node name="Spot_Enemy_Left" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="Left" type="CollisionShape2D" parent="Spot_Enemy_Left"]
+position = Vector2(-87, 0)
+shape = SubResource("RectangleShape2D_20bgm")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="World_Collision" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, 5)
+shape = SubResource("CapsuleShape2D_w35ma")
+
+[node name="Wall_Check_Left" type="RayCast2D" parent="."]
+position = Vector2(1, 6)
+target_position = Vector2(-20, 0)
+collision_mask = 8
+
+[node name="Grd_Check_Left" type="RayCast2D" parent="."]
+position = Vector2(-18, 4)
+target_position = Vector2(0, 27)
+collision_mask = 8
+
+[node name="Wall_Check_Right" type="RayCast2D" parent="."]
+position = Vector2(16, 6)
+target_position = Vector2(19, 0)
+collision_mask = 8
+
+[node name="Grd_Check_Right" type="RayCast2D" parent="."]
+position = Vector2(35, 5)
+target_position = Vector2(0, 27)
+collision_mask = 8
+
+[node name="Attack_Left" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_Left"]
+position = Vector2(-21.5, 0)
+shape = SubResource("RectangleShape2D_42f5o")
+
+[node name="Attack_Right" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_Right"]
+position = Vector2(26, 0)
+shape = SubResource("RectangleShape2D_42f5o")
+
+[connection signal="body_entered" from="Spot_Enemy_Right" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spot_Enemy_Right" to="." method="_on_spot_enemy_right_body_entered"]
+[connection signal="body_exited" from="Spot_Enemy_Right" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_exited" from="Spot_Enemy_Right" to="." method="_on_spot_enemy_right_body_exited"]
+[connection signal="body_entered" from="Spot_Enemy_Left" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spot_Enemy_Left" to="." method="_on_spot_enemy_left_body_entered"]
+[connection signal="body_exited" from="Spot_Enemy_Left" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_exited" from="Spot_Enemy_Left" to="." method="_on_spot_enemy_left_body_exited"]
+[connection signal="body_entered" from="Attack_Left" to="." method="_on_attack_left_body_entered"]
+[connection signal="body_exited" from="Attack_Left" to="." method="_on_attack_left_body_exited"]
+[connection signal="body_entered" from="Attack_Right" to="." method="_on_attack_right_body_entered"]
+[connection signal="body_exited" from="Attack_Right" to="." method="_on_attack_right_body_exited"]

@@ -1,0 +1,34 @@
+[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://dgcrj1at045bf"]
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_k2e7t"]
+resource_name = "Amplify"
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_5y80p"]
+resource_name = "Distortion"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_uih04"]
+resource_name = "Reverb"
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_adrc8"]
+resource_name = "Delay"
+
+[sub_resource type="AudioEffectStereoEnhance" id="AudioEffectStereoEnhance_dmfce"]
+resource_name = "StereoEnhance"
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_4ox75"]
+resource_name = "EQ"
+
+[resource]
+bus/0/volume_db = -0.923751
+bus/0/effect/0/effect = SubResource("AudioEffectAmplify_k2e7t")
+bus/0/effect/0/enabled = true
+bus/0/effect/1/effect = SubResource("AudioEffectDistortion_5y80p")
+bus/0/effect/1/enabled = true
+bus/0/effect/2/effect = SubResource("AudioEffectReverb_uih04")
+bus/0/effect/2/enabled = false
+bus/0/effect/3/effect = SubResource("AudioEffectDelay_adrc8")
+bus/0/effect/3/enabled = true
+bus/0/effect/4/effect = SubResource("AudioEffectStereoEnhance_dmfce")
+bus/0/effect/4/enabled = true
+bus/0/effect/5/effect = SubResource("AudioEffectEQ_4ox75")
+bus/0/effect/5/enabled = false

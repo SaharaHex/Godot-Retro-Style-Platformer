@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8yjtvhsg4648"]
+
+[ext_resource type="AudioStream" uid="uid://cehxxpoa42wo5" path="res://assets/music.mp3" id="1_3dull"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_3dull")
+volume_db = 4.952
+pitch_scale = 0.99
+autoplay = true
+max_distance = 100000.0
+attenuation = 12.996

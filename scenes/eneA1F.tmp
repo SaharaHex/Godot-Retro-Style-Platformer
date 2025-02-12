@@ -1,0 +1,144 @@
+[gd_scene load_steps=20 format=3 uid="uid://iycb7swvfweb"]
+
+[ext_resource type="Texture2D" uid="uid://bmq7rsyxbqhgn" path="res://assets/PlayerSprites/attack1.png" id="1_8mfc5"]
+[ext_resource type="Script" path="res://code/enemy_test.gd" id="1_bwnpr"]
+[ext_resource type="Texture2D" uid="uid://c7ve414gut3i8" path="res://assets/PlayerSprites/Run.png" id="1_qeodp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gybes"]
+atlas = ExtResource("1_8mfc5")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v307b"]
+atlas = ExtResource("1_8mfc5")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw1au"]
+atlas = ExtResource("1_8mfc5")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj1wa"]
+atlas = ExtResource("1_8mfc5")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy7eu"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ygpp"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nv72e"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyjp4"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_naq3h"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oim3w"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(1000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgfq7"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(1200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00gqx"]
+atlas = ExtResource("1_qeodp")
+region = Rect2(1400, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6amo0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gybes")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v307b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw1au")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj1wa")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy7eu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ygpp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nv72e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyjp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_naq3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oim3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgfq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00gqx")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_fhnpp"]
+script/source = "
+
+
+
+
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20bgm"]
+size = Vector2(200, 26)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w35ma"]
+height = 50.0
+
+[node name="Enemy_Test" type="Node2D"]
+script = ExtResource("1_bwnpr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6amo0")
+animation = &"Attack"
+autoplay = "Run"
+frame = 3
+frame_progress = 0.651083
+script = SubResource("GDScript_fhnpp")
+
+[node name="Spot_Enemy" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spot_Enemy"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_20bgm")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 5)
+shape = SubResource("CapsuleShape2D_w35ma")
+
+[connection signal="body_entered" from="Spot_Enemy" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Spot_Enemy" to="." method="_on_area_2d_body_exited"]

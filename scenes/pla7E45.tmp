@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnor85hphs8ki"]
+
+[ext_resource type="Script" path="res://code/player_laser.gd" id="1_lupdq"]
+[ext_resource type="Texture2D" uid="uid://cuou2q630seu5" path="res://assets/PlayerSprites/LaserSprite.png" id="1_qsgm5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2820g"]
+atlas = ExtResource("1_qsgm5")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3r7gf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2820g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_27qba"]
+radius = 4.0
+height = 12.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqt8m"]
+size = Vector2(7, 7)
+
+[node name="Player_Laser" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_lupdq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3, 17)
+sprite_frames = SubResource("SpriteFrames_3r7gf")
+autoplay = "default"
+frame_progress = 0.000185287
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_27qba")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_lqt8m")
+
+[node name="Disappear" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="Disappear" to="." method="_on_disappear_timeout"]
